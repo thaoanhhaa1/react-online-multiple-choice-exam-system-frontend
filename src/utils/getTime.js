@@ -4,9 +4,7 @@ function getTime(time) {
     const minutes = Number.parseInt(time / 60);
     const seconds = time % 60;
 
-    return `${formatNumber(minutes)}${minutes > 0 ? ':' : ''}${formatNumber(
-        seconds,
-    )}`;
+    return `${formatNumber(minutes)}:${formatNumber(seconds)}`;
 }
 
 function formatNumber(number) {

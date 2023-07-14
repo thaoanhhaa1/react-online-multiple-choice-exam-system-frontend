@@ -40,7 +40,7 @@ const Result = () => {
                         Câu tiếp theo
                     </Button>
                     <Button
-                        to='/exam'
+                        onClick={() => navigate(-1)}
                         fontWeight='700'
                         backgroundColor='#f26c4f'
                     >

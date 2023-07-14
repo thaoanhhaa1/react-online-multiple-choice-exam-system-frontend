@@ -1,10 +1,11 @@
-import { useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import Actions from '../components/Actions';
 import Question from '../components/Question';
 import Summary from '../components/Summary';
 import useQuestion from '../hooks/useQuestion';
 import Loading from './Loading';
+import PageNotFound from './PageNotFound';
 
 const tags = [
     { tag: 'Chưa xem', color: '#F6F9FC' },
@@ -14,7 +15,10 @@ const tags = [
 
 const Exam = () => {
     const [params] = useSearchParams();
-    const { fetch, isLoading, time, countdown } = useQuestion();
+    const navigate = useNavigate();
+    const [firstRender, setFirstRender] = useState(true);
+    const { fetch, isLoading, questions, time, countdown, handleSubmit } =
+        useQuestion();
 
     useEffect(() => {
         const subject = params.get('subject');
@@ -23,15 +27,30 @@ const Exam = () => {
         fetch(subject, size);
     }, [fetch, params]);
 
+    useEffect(() => setFirstRender(false), []);
+
     useEffect(() => {
         let id;
 
         if (time > 0) id = setTimeout(countdown, 1000);
+        else if (questions.length > 0 && !isLoading && !firstRender) {
+            handleSubmit();
+            navigate('/result');
+        }
 
         return () => clearTimeout(id);
-    }, [countdown, time]);
+    }, [
+        countdown,
+        firstRender,
+        handleSubmit,
+        isLoading,
+        navigate,
+        questions.length,
+        time,
+    ]);
 
     if (isLoading) return <Loading />;
+    else if (questions.length === 0) return <PageNotFound />;
 
     return (
         <div className='flex flex-col md:flex-row gap-5'>

@@ -13,27 +13,32 @@ const useQuestion = create((set) => ({
     fetch: (subject, size) =>
         set(async (state) => {
             state.setLoading(true);
-            const r = await axios.get(
-                `${process.env.REACT_APP_ENDPOINT}/question/all?subject=${subject}&size=${size}`,
-            );
 
-            const res = r.data;
-            const length = res.length;
+            try {
+                const r = await axios.get(
+                    `${process.env.REACT_APP_ENDPOINT}/question/all?subject=${subject}&size=${size}`,
+                );
 
-            const arr = new Array(length).fill(NOT_SEEN);
-            arr[0] = NOT_ANSWERED;
+                const res = r.data;
+                const length = res.length;
 
-            const result = {
-                isLoading: false,
-                activeNumber: 0,
-                numberQuestions: length,
-                questions: res,
-                statusQuestions: arr,
-                results: new Array(length).fill(null),
-                time: length * 60,
-            };
+                const arr = new Array(length).fill(NOT_SEEN);
+                arr[0] = NOT_ANSWERED;
 
-            state.setValue(result);
+                const result = {
+                    isLoading: false,
+                    activeNumber: 0,
+                    numberQuestions: length,
+                    questions: res,
+                    statusQuestions: arr,
+                    results: new Array(length).fill(null),
+                    time: length * 60,
+                };
+
+                state.setValue(result);
+            } catch (error) {
+                state.setLoading(false);
+            }
         }),
     setValue: (value) => set(() => value),
     setLoading: (isLoading) => set(() => ({ isLoading })),
