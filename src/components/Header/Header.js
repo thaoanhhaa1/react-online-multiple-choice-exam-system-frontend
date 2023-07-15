@@ -9,7 +9,7 @@ const Header = () => {
             </Link>
             <div className='flex items-center gap-2'>
                 <Link className='font-semibold' to='/'>
-                    Home
+                    Trang chủ
                 </Link>
             </div>
         </div>

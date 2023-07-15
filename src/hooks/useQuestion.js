@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { create } from 'zustand';
-import { CORRECT, NOT_ANSWERED, NOT_SEEN, WRONG } from '../constant';
+import { CORRECT, NOT_ANSWERED, NOT_SEEN, WRONG, ANSWERED } from '../constant';
 
 const useQuestion = create((set) => ({
     questions: [],
@@ -53,7 +53,8 @@ const useQuestion = create((set) => ({
     handleStatusQuestion: (status) =>
         set((state) => {
             const statusQuestions = [...state.statusQuestions];
-            statusQuestions[state.activeNumber] = status;
+            if (statusQuestions[state.activeNumber] !== ANSWERED)
+                statusQuestions[state.activeNumber] = status;
             return {
                 statusQuestions,
             };

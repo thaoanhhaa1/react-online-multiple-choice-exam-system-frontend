@@ -41,9 +41,14 @@ const Radio = ({ correctIndex, value, number, disabled }) => {
                     className='transition-all w-[12px] h-[12px] rounded-full group-hover:bg-[#EF803D]'
                 ></div>
             </div>
-            <span className='select-none transition-all group-hover:text-[#EF803D] group-hover:font-bold'>
-                {String.fromCharCode(65 + number)}. {value}
-            </span>
+            <div className='relative'>
+                <span className='select-none transition-all group-hover:text-[#EF803D] group-hover:font-bold'>
+                    {String.fromCharCode(65 + number)}. {value}
+                </span>
+                <div className='absolute top-0 left-0 font-bold invisible'>
+                    {String.fromCharCode(65 + number)}. {value}
+                </div>
+            </div>
         </label>
     );
 };
