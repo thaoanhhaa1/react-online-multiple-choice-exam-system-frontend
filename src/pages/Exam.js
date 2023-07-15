@@ -21,6 +21,10 @@ const Exam = () => {
         useQuestion();
 
     useEffect(() => {
+        document.title = 'Trắc nghiệm Online miễn phí - IUH';
+    }, []);
+
+    useEffect(() => {
         const subject = params.get('subject');
         const size = params.get('size');
 

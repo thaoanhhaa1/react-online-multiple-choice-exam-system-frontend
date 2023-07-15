@@ -16,6 +16,10 @@ const Result = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        document.title = 'Trắc nghiệm Online miễn phí - IUH';
+    }, []);
+
+    useEffect(() => {
         if (!numberQuestions) navigate('/');
     }, [navigate, numberQuestions]);
 

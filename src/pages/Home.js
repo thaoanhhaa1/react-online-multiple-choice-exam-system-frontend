@@ -7,6 +7,10 @@ const Home = () => {
     const { isLoading, subjects, fetch } = useSubject();
 
     useEffect(() => {
+        document.title = 'Trắc nghiệm Online miễn phí - IUH';
+    }, []);
+
+    useEffect(() => {
         if (subjects.length === 0) fetch();
     }, [fetch, subjects.length]);
 
