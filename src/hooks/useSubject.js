@@ -18,7 +18,7 @@ const useSubject = create((set) => ({
                 state.setLoading(true);
 
                 const res = await axios.get(
-                    `${process.env.REACT_APP_ENDPOINT}/subject/all`,
+                    `${process.env.REACT_APP_ENDPOINT}/subjects/all`,
                 );
 
                 state.setValue({

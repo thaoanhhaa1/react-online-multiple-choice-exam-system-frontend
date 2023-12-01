@@ -16,7 +16,7 @@ const useQuestion = create((set) => ({
 
             try {
                 const r = await axios.get(
-                    `${process.env.REACT_APP_ENDPOINT}/question/all?subject=${subject}&size=${size}`,
+                    `${process.env.REACT_APP_ENDPOINT}/questions/all?subject=${subject}&size=${size}`,
                 );
 
                 const res = r.data;
